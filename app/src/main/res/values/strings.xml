@@ -3,4 +3,10 @@
     <string name="app_logo">App Logo</string>
     <string name="splash">Splash Screen</string>
     <string name="error_message">알 수 없는 오류가 발생했습니다</string>
+
+    <!--  Search  -->
+    <string name="Search">Search</string>
+
+    <!--  Favorite  -->
+    <string name="Favorite">Favorite</string>
 </resources>
