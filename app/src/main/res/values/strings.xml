@@ -14,4 +14,7 @@
 
     <!--  Favorite  -->
     <string name="favorite">Favorite</string>
+    <string name="empty_favorite_icon">Empty Favorite Icon</string>
+    <string name="favorite_screen_title">\'좋아요\'한 컨텐츠</string>
+    <string name="empty_favorite_screen">보관함이 비었습니다</string>
 </resources>

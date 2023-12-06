@@ -1,4 +1,4 @@
-package com.echung93.searchapp.presentation.search.component
+package com.echung93.searchapp.presentation.favorite.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +21,7 @@ import com.echung93.searchapp.R
 import com.echung93.searchapp.ui.theme.Primary
 
 @Composable
-fun EmptySearchResult() {
+fun EmptyFavoriteScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,12 +32,12 @@ fun EmptySearchResult() {
     {
         Icon(
             modifier = Modifier.size(120.dp),
-            painter = painterResource(id = R.drawable.ic_sad_face),
-            contentDescription = stringResource(id = R.string.sad_face_icon),
+            painter = painterResource(id = R.drawable.ic_empty_favorite),
+            contentDescription = stringResource(id = R.string.empty_favorite_icon),
             tint = Primary
         )
         Text(
-            text = stringResource(id = R.string.empty_search_result),
+            text = stringResource(id = R.string.empty_favorite_screen),
             color = Color.LightGray,
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.typography.h6.fontSize
@@ -47,6 +47,6 @@ fun EmptySearchResult() {
 
 @Composable
 @Preview
-fun EmptySearchResultPreview() {
-    EmptySearchResult()
+fun PreviewEmptyFavoriteScreen() {
+    EmptyFavoriteScreen()
 }
