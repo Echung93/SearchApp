@@ -1,16 +1,19 @@
-package com.echung93.andoridtest.domain.use_case.search
+package com.echung93.searchapp.domain.use_case.search
 
+import com.echung93.searchapp.domain.repository.FavoriteRepository
 import com.echung93.searchapp.domain.repository.SearchRepository
 import com.echung93.searchapp.domain.util.Resource
 import com.echung93.searchapp.model.KakaoSearchData
 import com.echung93.searchapp.model.SearchData
 import com.echung93.searchapp.presentation.search.SearchResultState
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetSearchDataUseCase @Inject constructor(
     private val repository: SearchRepository,
+    private val favoriteRepository: FavoriteRepository
 ) {
     private val kakaoSearchList = mutableListOf<SearchData>()
     private var query = ""
@@ -56,6 +59,9 @@ class GetSearchDataUseCase @Inject constructor(
 
 
         if (query != "") {
+            val favoriteList = favoriteRepository.getFavoriteData().first().toList()
+            val favoriteData = favoriteList.map { it.item }
+
             val itemList: List<KakaoSearchData> =
                 kakaoSearchList.subList(
                     0,
@@ -65,7 +71,7 @@ class GetSearchDataUseCase @Inject constructor(
                 )
                     .map { kakaoData ->
                         KakaoSearchData(
-                            false,
+                            favoriteData.contains(kakaoData),
                             kakaoData
                         )
                     }

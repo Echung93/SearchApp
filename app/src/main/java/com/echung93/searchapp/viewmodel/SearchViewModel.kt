@@ -2,7 +2,9 @@ package com.echung93.andoridtest.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.echung93.andoridtest.domain.use_case.search.GetSearchDataUseCase
+import com.echung93.searchapp.domain.use_case.favorite.AddFavoriteDataUseCase
+import com.echung93.searchapp.domain.use_case.favorite.DeleteFavoriteDataUseCase
+import com.echung93.searchapp.domain.use_case.search.GetSearchDataUseCase
 import com.echung93.searchapp.domain.util.Resource
 import com.echung93.searchapp.model.KakaoSearchData
 import com.echung93.searchapp.presentation.search.SearchResultState
@@ -11,12 +13,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val getSearchDataUseCase: GetSearchDataUseCase
+    private val getSearchDataUseCase: GetSearchDataUseCase,
+    private val addFavoriteDataUseCase: AddFavoriteDataUseCase,
+    private val deleteFavoriteDataUseCase: DeleteFavoriteDataUseCase,
 ) : ViewModel() {
 
     private val _searchState: MutableStateFlow<SearchUiState> =
@@ -79,7 +84,25 @@ class SearchViewModel @Inject constructor(
 
     fun toggleFavorite(kakaoSearchData: KakaoSearchData) {
         viewModelScope.launch(Dispatchers.IO) {
+            if(kakaoSearchData.isFavorite) {
+                deleteFavoriteDataUseCase(kakaoSearchData)
+            } else {
+                addFavoriteDataUseCase(kakaoSearchData)
+            }
 
+            _searchList.update { searchResultState ->
+                searchResultState.copy(
+                    searchResult =  searchResultState.searchResult.toMutableList().apply {
+                        val index = indexOfFirst { item ->
+                            item.data == kakaoSearchData.data
+                        }
+
+                        if(index != -1) {
+                            this[index] = kakaoSearchData.copy(isFavorite = !kakaoSearchData.isFavorite)
+                        }
+                    }
+                )
+            }
         }
     }
 
