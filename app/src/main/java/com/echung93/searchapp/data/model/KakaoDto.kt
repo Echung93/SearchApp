@@ -1,4 +1,4 @@
-package com.echung93.searchapp.data.remote
+package com.echung93.searchapp.data.model
 
 import com.google.gson.annotations.SerializedName
 import java.util.*

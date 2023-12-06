@@ -1,6 +1,6 @@
 package com.echung93.searchapp.data.mapper
 
-import com.echung93.searchapp.data.remote.KakaoDto
+import com.echung93.searchapp.data.model.KakaoDto
 import com.echung93.searchapp.domain.search.SearchData
 import com.echung93.searchapp.domain.search.SearchEntity
 

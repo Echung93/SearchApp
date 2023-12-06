@@ -1,6 +1,7 @@
 package com.echung93.searchapp.data.remote
 
 import com.echung93.searchapp.BuildConfig
+import com.echung93.searchapp.data.model.KakaoDto
 import com.echung93.searchapp.util.Constants
 import retrofit2.http.GET
 import retrofit2.http.Header
