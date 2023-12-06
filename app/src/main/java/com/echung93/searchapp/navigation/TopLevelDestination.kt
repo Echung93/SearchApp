@@ -13,13 +13,13 @@ enum class TopLevelDestination(
     Search(
         selectedIcon = AppIcons.Search,
         unselectedIcon = AppIcons.SearchBorder,
-        iconTextId = R.string.Search,
+        iconTextId = R.string.search,
         route = SearchNavigationRoute
     ),
     Favorite(
         selectedIcon = AppIcons.Favorite,
         unselectedIcon = AppIcons.FavoriteBorder,
-        iconTextId = R.string.Favorite,
+        iconTextId = R.string.favorite,
         route = FavoriteNavigationRoute
     )
 }

@@ -5,8 +5,13 @@
     <string name="error_message">알 수 없는 오류가 발생했습니다</string>
 
     <!--  Search  -->
-    <string name="Search">Search</string>
+    <string name="search">Search</string>
+    <string name="query_is_empty">검색어를 입력해주세요</string>
+    <string name="sad_face_icon">Sad Face Icon</string>
+    <string name="empty_search_result">검색 결과가 없습니다</string>
+    <string name="last_page_result">마지막 페이지 입니다</string>
+    <string name="close">Close</string>
 
     <!--  Favorite  -->
-    <string name="Favorite">Favorite</string>
+    <string name="favorite">Favorite</string>
 </resources>

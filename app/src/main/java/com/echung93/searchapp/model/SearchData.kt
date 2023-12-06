@@ -1,4 +1,4 @@
-package com.echung93.searchapp.domain.search
+package com.echung93.searchapp.model
 
 import java.util.*
 

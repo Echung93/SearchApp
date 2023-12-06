@@ -13,8 +13,8 @@ class SearchRepositoryImpl @Inject constructor(
 ): SearchRepository {
     override suspend fun getSearchData(
         query: String,
-        page: Int?,
-        size: Int?
+        page: Int,
+        size: Int
     ): Resource<SearchEntity> {
         return try{
             Resource.Success(
