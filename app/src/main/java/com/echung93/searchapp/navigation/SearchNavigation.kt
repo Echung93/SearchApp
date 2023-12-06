@@ -13,11 +13,13 @@ fun NavController.navigateToSearch(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.SearchScreen(
-
+    showSnackbar: (String) -> Unit
 ) {
     composable(
         route = SearchNavigationRoute
     ) {
-        SearchRoute()
+        SearchRoute(
+            showSnackbar = showSnackbar
+        )
     }
 }

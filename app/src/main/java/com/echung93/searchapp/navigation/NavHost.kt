@@ -6,6 +6,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import kotlinx.coroutines.launch
 
 @Composable
 fun NavHost(
@@ -21,7 +22,13 @@ fun NavHost(
         navController = navController,
         startDestination = TopLevelDestination.Search.route
     ) {
-        SearchScreen()
+        SearchScreen(
+            showSnackbar = { error ->
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(error)
+                }
+            }
+        )
         FavoriteScreen()
     }
 

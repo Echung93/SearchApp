@@ -9,7 +9,8 @@ import com.echung93.andoridtest.viewmodel.SearchViewModel
 
 @Composable
 fun SearchRoute(
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel(),
+    showSnackbar: (String) -> Unit,
 ) {
     val searchUiState by viewModel.searchState.collectAsStateWithLifecycle()
     val searchList by viewModel.searchList.collectAsStateWithLifecycle()
@@ -22,7 +23,7 @@ fun SearchRoute(
         searchUiState = searchUiState,
         searchList = searchList,
         onQuery = { query -> viewModel.onQuery(query) },
-        onError = {},
+        onError = showSnackbar,
         onNextPage = { page -> viewModel.onNextPage(page)},
         onFavoriteClicked = { kakaoSearchData->
             viewModel.toggleFavorite(kakaoSearchData)
