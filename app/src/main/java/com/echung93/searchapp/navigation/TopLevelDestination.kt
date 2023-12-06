@@ -17,8 +17,8 @@ enum class TopLevelDestination(
         route = SearchNavigationRoute
     ),
     Favorite(
-        selectedIcon = AppIcons.Search,
-        unselectedIcon = AppIcons.SearchBorder,
+        selectedIcon = AppIcons.Favorite,
+        unselectedIcon = AppIcons.FavoriteBorder,
         iconTextId = R.string.Favorite,
         route = FavoriteNavigationRoute
     )
