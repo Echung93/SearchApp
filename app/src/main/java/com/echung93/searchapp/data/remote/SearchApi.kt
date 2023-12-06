@@ -12,6 +12,7 @@ interface SearchApi {
     suspend fun getSearchDataResponse(
         @Header("Authorization") apiKey: String = Constants.AUTH_HEADER + BuildConfig.KAKAO_API_KEY,
         @Query("query") query: String,
+        @Query("sort") sort:String,
         @Query("page") page: Int?,
         @Query("size") size: Int?
     ): KakaoDto

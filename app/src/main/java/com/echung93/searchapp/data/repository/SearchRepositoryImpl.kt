@@ -21,6 +21,7 @@ class SearchRepositoryImpl @Inject constructor(
                 data = api.getSearchDataResponse(
                     query = query,
                     page = page,
+                    sort = "recency",
                     size = size
                 ).toDomain()
             )
