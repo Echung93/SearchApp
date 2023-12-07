@@ -32,6 +32,15 @@
 
 <br>
 
+## 실행 방법
+빌드 전, 'local.properties'에 다음과 같이 API KEY 값을 추가해야 합니다.
+
+```groovy
+kakao_api_key = {kakaoAPI KEY}
+```
+
+<br>
+
 ## 페이지별 기능
 
 ### [초기 화면]
