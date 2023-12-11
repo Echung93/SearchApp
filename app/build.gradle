@@ -16,8 +16,8 @@ android {
         applicationId "com.echung93.searchapp"
         minSdk 26
         targetSdk 34
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 5
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -29,8 +29,6 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "KAKAO_API_KEY", properties.getProperty("kakao_api_key"))
-
             shrinkResources false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
