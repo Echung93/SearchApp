@@ -5,6 +5,9 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'com.echung93.searchapp'
     compileSdk 34
@@ -13,22 +16,23 @@ android {
         applicationId "com.echung93.searchapp"
         minSdk 26
         targetSdk 34
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
         }
 
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
         buildConfigField("String", "KAKAO_API_KEY", properties.getProperty("kakao_api_key"))
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField("String", "KAKAO_API_KEY", properties.getProperty("kakao_api_key"))
+
+            shrinkResources false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -98,3 +102,4 @@ dependencies {
     kapt "androidx.room:room-compiler:2.6.1"
     implementation "androidx.room:room-ktx:2.6.1"
 }
+

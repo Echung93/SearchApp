@@ -1,11 +1,11 @@
 package com.echung93.searchapp.presentation.search
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.echung93.andoridtest.viewmodel.SearchUiState
 import com.echung93.searchapp.model.KakaoSearchData
 import com.echung93.searchapp.presentation.component.LoadingScreen
@@ -46,12 +46,11 @@ fun SearchScreen(
         onClose()
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    )
+    {
         CustomSearchBar(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
             active = active,
             query = query,
             onQuery = { onSearchEvent() },
