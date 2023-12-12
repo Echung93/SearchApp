@@ -51,14 +51,13 @@ class GetSearchDataUseCase @Inject constructor(
                     }
                 }
                 else -> {
-
                 }
             }
             break
         }
 
 
-        if (query != "") {
+        if (newQuery != "") {
             val favoriteList = favoriteRepository.getFavoriteData().first().toList()
             val favoriteData = favoriteList.map { it.item }
 

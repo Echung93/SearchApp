@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.echung93.andoridtest.viewmodel.SearchViewModel
+import com.echung93.searchapp.viewmodel.SearchViewModel
 
 @Composable
 fun SearchRoute(
@@ -14,12 +14,16 @@ fun SearchRoute(
 ) {
     val searchUiState by viewModel.searchState.collectAsStateWithLifecycle()
     val searchList by viewModel.searchList.collectAsStateWithLifecycle()
+    val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
+    val closeButtonVisible by viewModel.closeButtonVisible.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = true) {
         viewModel.onRefresh()
     }
 
     SearchScreen(
+        query = searchQuery,
+        closeButtonVisible = closeButtonVisible,
         searchUiState = searchUiState,
         searchList = searchList,
         onQuery = { query -> viewModel.onQuery(query) },
@@ -28,6 +32,8 @@ fun SearchRoute(
         onFavoriteClicked = { kakaoSearchData->
             viewModel.toggleFavorite(kakaoSearchData)
         },
-        onClose = { viewModel.onClose()}
+        onClose = viewModel::onClose,
+        onSearchQueryChanged = viewModel::onSearchQueryChanged,
+        onCloseButtonVisibleChanged = viewModel:: onCloseButtonVisibleChanged
     )
 }

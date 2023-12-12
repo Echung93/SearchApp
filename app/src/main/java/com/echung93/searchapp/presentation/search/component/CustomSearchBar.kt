@@ -22,31 +22,33 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.echung93.searchapp.R
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomSearchBar(
-    onQuery: () -> Unit,
+    modifier: Modifier = Modifier,
     active: Boolean = false,
     query: String = "",
+    closeButtonVisible: Boolean,
     onQueryChange: (String) -> Unit,
-    onActiveChange: (Boolean) -> Unit,
+    onActiveChange: (Boolean) -> Unit = {},
+    onCloseClicked: () -> Unit,
+    onSearchClicked: () -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
     val onSearch = {
         keyboardController?.hide()
-        onQuery()
+        onSearchClicked()
     }
 
     val onClose = {
         keyboardController?.hide()
         onQueryChange("")
-        onActiveChange(false)
+        onCloseClicked()
     }
 
     SearchBar(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -64,13 +66,9 @@ fun CustomSearchBar(
                 onQueryChange(it)
             }
         },
-        onSearch = {
-            onSearch()
-        },
-        active = false,
-        onActiveChange = {
-            onActiveChange(it)
-        },
+        onSearch = { onSearch() },
+        active = active,
+        onActiveChange = onActiveChange,
         placeholder = {
             Text(text = stringResource(id = R.string.search))
         },
@@ -82,7 +80,7 @@ fun CustomSearchBar(
                         contentDescription = stringResource(id = R.string.search)
                     )
                 }
-                if (active) {
+                if (closeButtonVisible) {
                     IconButton(
                         onClick = onClose
                     ) {

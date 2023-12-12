@@ -1,5 +1,6 @@
-package com.echung93.andoridtest.viewmodel
+package com.echung93.searchapp.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.echung93.searchapp.domain.use_case.favorite.AddFavoriteDataUseCase
@@ -17,12 +18,19 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val SEARCH_QUERY = "searchQuery"
+private const val CLOSE_BUTTON_VISIBLE = "closeButtonVisible"
+
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val getSearchDataUseCase: GetSearchDataUseCase,
     private val addFavoriteDataUseCase: AddFavoriteDataUseCase,
     private val deleteFavoriteDataUseCase: DeleteFavoriteDataUseCase,
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+
+    val searchQuery = savedStateHandle.getStateFlow(key = SEARCH_QUERY, initialValue = "")
+    val closeButtonVisible = savedStateHandle.getStateFlow(key = CLOSE_BUTTON_VISIBLE, initialValue = false)
 
     private val _searchState: MutableStateFlow<SearchUiState> =
         MutableStateFlow(SearchUiState.IDLE)
@@ -40,6 +48,7 @@ class SearchViewModel @Inject constructor(
 
     fun onQuery(query: String) {
         _searchState.value = SearchUiState.LOADING
+
         if (query.isNotEmpty()) {
             loadData(query, 1)
         }
@@ -110,10 +119,19 @@ class SearchViewModel @Inject constructor(
         _searchList.value = SearchResultState(
             query = "",
             page = 1,
-            pageable = false
+            pageable = false,
+            searchResult = emptyList()
         )
 
         _searchState.value = SearchUiState.IDLE
+    }
+
+    fun onSearchQueryChanged(query: String) {
+        savedStateHandle[SEARCH_QUERY] = query
+    }
+
+    fun onCloseButtonVisibleChanged(active: Boolean) {
+        savedStateHandle[CLOSE_BUTTON_VISIBLE] = active
     }
 }
 
