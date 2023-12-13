@@ -1,7 +1,7 @@
 # SearchApp
 
 ![searchApp mockup](https://github.com/Echung93/SearchApp/assets/83617532/438d439f-60ad-4672-95e3-4b65250d3830)
-
+- 배포 URL : https://play.google.com/store/apps/details?id=com.echung93.searchapp
 <br>
 
 ## 프로젝트 소개
@@ -70,6 +70,14 @@ kakao_api_key = {kakaoAPI KEY}
 | 보관함 화면 |
 |----------|
 |![FavoritePage](https://github.com/Echung93/SearchApp/assets/83617532/9ce72721-244b-4973-88d4-61cf31a4a7ed)
+
+<br>
+
+## 트러블 슈팅
+- 라이브러리 사용 오류 : material3라이브러리를 사용 중 키보드를 내리면 다시 안 올라오는 현상이 생겼습니다. 알고 보니 1.2.0-alpha12 버전을 사용하면서 ExperimentalComposeUiApi를 적용 안 하게 되면서 생기는 오류였습니다. 1.1.2버전을 사용하니 바로 오류가 수정되었습니다.
+로그에도 찍히지 않아 오류를 찾는데 많은 시간이 소비되었지만, 이 경험으로 라이브러리를 선택하는 데 있어서 무조건 최신 버전이 아닌 신중하게 사용해야겠다는 생각을 하였습니다.
+- 난독화 오류 : 앱을 출시하면서 난독화를 진행하여 앱을 출시하였지만, 난독화로 인해서 출시된 앱에서 API 검색이 잘 안되는 것을 확인할 수 있었습니다. 난독화는 클래스, 변수, 메서드 이름 등을 변경하는 것이라서 그런 것 같았습니다.
+모델 부분에서 @SerializedName이 있어서 Json 모델 클래스와 매핑이 제대로 이루어지지 않아 발생하는 것으로 판단하였고, 그래서 model 부분을 proguard-rules에 추가하는 것으로 문제를 해결할 수 있었습니다.
 
 <br>
 
